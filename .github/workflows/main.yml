@@ -17,4 +17,4 @@ jobs:
         run: dotnet tool install --global kickflip --version 1.1.4-alpha
         
       - name: Kickflip PR comment changes
-        run: github pull-request --repo $GITHUB_REPOSITORY --ref $GITHUB_REF --token ${{ secrets.GITHUB_TOKEN }}
+        run: kickflip github pull-request --repo $GITHUB_REPOSITORY --ref $GITHUB_REF --token ${{ secrets.GITHUB_TOKEN }}
