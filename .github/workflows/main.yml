@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ "main" ]
+    
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
+      
+      - name: Debugging
+        run: |
+          git rev-parse HEAD
+          git status
+          git log -1
+
+      # asdfasd
+      - name: Install kickflip
+        run: dotnet tool install --global kickflip --version 1.2.3-alpha
+        
+      - name: Kickflip PR comment changes
+        run: kickflip github pull-request --repo $GITHUB_REPOSITORY --ref $GITHUB_REF --token ${{ secrets.GITHUB_TOKEN }}
