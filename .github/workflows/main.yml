@@ -13,17 +13,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
-      
-      - name: Debugging
-        run: |
-          git rev-parse HEAD
-          git status
-          git log -1
-
-      # asdfasd
+          fetch-depth: 0 # avoid shallow clone so kickflip can do its work.
+    
       - name: Install kickflip
-        run: dotnet tool install --global kickflip --version 1.2.3-alpha
+        run: dotnet tool install --global kickflip --prerelease
         
       - name: Kickflip PR comment changes
         run: kickflip github pull-request --repo $GITHUB_REPOSITORY --ref $GITHUB_REF --token ${{ secrets.GITHUB_TOKEN }}
